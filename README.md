@@ -1,1 +1,1 @@
-# qPCR-data-analysis-R
+# RT qPCRdata analysis using R (Tidyverse)
