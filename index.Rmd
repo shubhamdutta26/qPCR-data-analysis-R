@@ -46,7 +46,6 @@ Let us move to the fun part now!
 
 ### Data Analysis
 
-<br>
 
 #### Install and load Tidyverse package
 
@@ -134,16 +133,19 @@ Second, we calculate the $\Delta$$\Delta$C~T~ values and append the values to *n
 nkg2a_gapdh <- nkg2a_gapdh %>% mutate(del_del_cq = del_cq - nkg2a_empty)
 head(nkg2a_gapdh)
 ```
-Finally, we can calculate the fold change gene expression for each condition using the F~C~ formula above.
+Next, we can calculate the fold change gene expression for each condition using the F~C~ formula above.
 ```{r}
 nkg2a_geneExp <- nkg2a_gapdh %>% mutate(geneExp = 2^(del_del_cq))
 head(nkg2a_geneExp)
 ```
+Finally, let us calculate statistical parameters using `mean()` and `sd()` for the data:
+```{r}
+nkg2a_geneExp_final <- nkg2a_geneExp %>% group_by(Biological.Set.Name) %>% summarise(mean_geneExp = mean(geneExp), sd_geneExp = sd(geneExp)) %>% mutate(Target = c("NKG2A", "NKG2A", "NKG2A"))
+head(nkg2a_geneExp_final)
+```
 Please feel free to use the dataset to calculate the $\Delta$$\Delta$C~T~ for NKG2C and CD94 genes.
 
-<br>
-
-Lets move on to the plotting the data.
+Lets move on to the visualization of our data.
 ```{r echo=FALSE, fig.show='hide'}
 ### NKG2C start
 
@@ -225,13 +227,54 @@ cd94_plot
 ### CD94 end
 ```
 
-### Data Plotting
-## Including Plots
+### Data Visualization
+Before plotting the data let us make a single df. We will use `full_join` to accomplish this and make a new df called **all** which contains the analysis for individual targets namely NKG2C (**nkg2c_geneExp_final**) and CD94 (**cd94_geneExp_final**).
 
-You can also embed plots, for example:
+```{r}
+all <- full_join(nkg2a_geneExp_final, nkg2c_geneExp_final)
+all <- full_join(all, cd94_geneExp_final)
+head(all)
+```
+Let us now use `ggplot` package to plot a bar plot for the RT-qPCR data.
+```{r}
+final_plot <- ggplot(all, aes(x = Biological.Set.Name, y = mean_geneExp, fill = Target)) +
+  geom_bar(stat = "identity", width = 0.5, position = position_dodge(0.6), color = "#434343") +
+  geom_errorbar(aes(ymin = mean_geneExp - sd_geneExp, ymax = mean_geneExp + sd_geneExp), width=.2, position = position_dodge(0.6)) +
+  theme_bw()+
+  labs(title = "Human NKG2A/C-CD94 overexpression status in HEK293 cells",
+       subtitle = "2021.11.23 Shubham Dutta",
+       x = "Transfection (Human genes)",
+       y = "Expression relative to GAPDH",
+       fill = "Target gene",
+       caption = NULL)+
+  theme(plot.title=element_text(size=13),
+        axis.text=element_text(size=12, color = "#434343"),
+        axis.title=element_text(size=13),
+        legend.text=element_text(size=10),
+        legend.title=element_text(size=12),
+        legend.position = c(0.2, 0.8),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  scale_fill_manual(values = c("#d55e00", "#0072b2", "#009e73")) # color blind palette
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+final_plot
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#### Exporting the plot
+
+The plot can be exported as a png file like so:
+```{r error=FALSE, warning=FALSE, message=FALSE}
+ggsave(filename = "qpcr.png", final_plot, dpi = 600)
+```
+There are other formats that can be used as well. Please read the documentation [here](https://ggplot2.tidyverse.org/reference/ggsave.html).
+<br><br>
+
+### References
+
+1. Kenneth J. Livak, Thomas D. Schmittgen, Analysis of Relative Gene Expression Data Using Real-Time Quantitative PCR and the 2−ΔΔCT Method, Methods, Volume 25, Issue 4, 2001, Pages 402-408, ISSN 1046-2023, https://doi.org/10.1006/meth.2001.1262.
+
+<br><br>
+
+
+
