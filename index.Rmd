@@ -230,10 +230,13 @@ cd94_plot
 ### Data Visualization
 Before plotting the data let us make a single df. We will use `full_join` to accomplish this and make a new df called **all** which contains the analysis for individual targets namely NKG2C (**nkg2c_geneExp_final**) and CD94 (**cd94_geneExp_final**).
 
-```{r}
+```{r error=FALSE, warning=FALSE, message=FALSE}
 all <- full_join(nkg2a_geneExp_final, nkg2c_geneExp_final)
 all <- full_join(all, cd94_geneExp_final)
-head(all)
+```
+
+```{r}
+all
 ```
 Let us now use `ggplot` package to plot a bar plot for the RT-qPCR data.
 ```{r}

@@ -212,20 +212,20 @@ pre code {
 <p>Now we will import the qPCR data (a csv document in this case) into the R Studio environment using the <code>read.csv</code> function and store it as a dataframe (df) called <strong>qpcr</strong>.<br></p>
 <pre class="r"><code>qpcr &lt;- read.csv(&quot;qPCR_HEKs_OE_NKG2A-C_human.csv&quot;, stringsAsFactors = FALSE)
 tibble(qpcr)</code></pre>
-<pre><code>## # A tibble: 60 x 15
-##    Well  Fluor Target Content Sample   Biological.Set.Name    Cq Cq.Mean Cq.Std..Dev
-##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;dbl&gt;   &lt;dbl&gt;       &lt;int&gt;
-##  1 A01   SYBR  GAPDH  Unkn    Sample 1 empty vector         14.5    14.5           0
-##  2 A02   SYBR  NKG2A  Unkn    Sample 1 empty vector         20.0    20.0           0
-##  3 A03   SYBR  NKG2C  Unkn    Sample 1 empty vector         17.5    17.5           0
-##  4 A04   SYBR  CD94   Unkn    Sample 1 empty vector         19.8    19.8           0
-##  5 A05   SYBR  GAPDH  Unkn    Sample 1 pcDNA-NKG2A          14.5    14.5           0
-##  6 A06   SYBR  NKG2A  Unkn    Sample 1 pcDNA-NKG2A          14.3    14.3           0
-##  7 A07   SYBR  NKG2C  Unkn    Sample 1 pcDNA-NKG2A          19.2    19.2           0
-##  8 A08   SYBR  CD94   Unkn    Sample 1 pcDNA-NKG2A          14.4    14.4           0
-##  9 A09   SYBR  GAPDH  Unkn    Sample 1 pcDNA-NKG2C          14.5    14.5           0
-## 10 A10   SYBR  NKG2A  Unkn    Sample 1 pcDNA-NKG2C          22.3    22.3           0
-## # ... with 50 more rows, and 6 more variables: Starting.Quantity..SQ. &lt;dbl&gt;,
+<pre><code>## # A tibble: 60 × 15
+##    Well  Fluor Target Content Sample  Biological.Set.…    Cq Cq.Mean Cq.Std..Dev
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;       &lt;int&gt;
+##  1 A01   SYBR  GAPDH  Unkn    Sample… empty vector      14.5    14.5           0
+##  2 A02   SYBR  NKG2A  Unkn    Sample… empty vector      20.0    20.0           0
+##  3 A03   SYBR  NKG2C  Unkn    Sample… empty vector      17.5    17.5           0
+##  4 A04   SYBR  CD94   Unkn    Sample… empty vector      19.8    19.8           0
+##  5 A05   SYBR  GAPDH  Unkn    Sample… pcDNA-NKG2A       14.5    14.5           0
+##  6 A06   SYBR  NKG2A  Unkn    Sample… pcDNA-NKG2A       14.3    14.3           0
+##  7 A07   SYBR  NKG2C  Unkn    Sample… pcDNA-NKG2A       19.2    19.2           0
+##  8 A08   SYBR  CD94   Unkn    Sample… pcDNA-NKG2A       14.4    14.4           0
+##  9 A09   SYBR  GAPDH  Unkn    Sample… pcDNA-NKG2C       14.5    14.5           0
+## 10 A10   SYBR  NKG2A  Unkn    Sample… pcDNA-NKG2C       22.3    22.3           0
+## # … with 50 more rows, and 6 more variables: Starting.Quantity..SQ. &lt;dbl&gt;,
 ## #   Log.Starting.Quantity &lt;dbl&gt;, SQ.Mean &lt;dbl&gt;, SQ.Std..Dev &lt;int&gt;,
 ## #   Set.Point &lt;int&gt;, Well.Note &lt;lgl&gt;</code></pre>
 <p>There are 15 columns (variables) in our data but we only need a some them for our data analysis. Therefore, using the <code>select</code> function we will extract the columns we need and store them in a new df called <strong>tidyData</strong>.</p>
@@ -233,10 +233,10 @@ tibble(qpcr)</code></pre>
 glimpse(tidyData)</code></pre>
 <pre><code>## Rows: 60
 ## Columns: 4
-## $ Target              &lt;chr&gt; &quot;GAPDH&quot;, &quot;NKG2A&quot;, &quot;NKG2C&quot;, &quot;CD94&quot;, &quot;GAPDH&quot;, &quot;NKG2A~
-## $ Sample              &lt;chr&gt; &quot;Sample 1&quot;, &quot;Sample 1&quot;, &quot;Sample 1&quot;, &quot;Sample 1&quot;, &quot;S~
-## $ Biological.Set.Name &lt;chr&gt; &quot;empty vector&quot;, &quot;empty vector&quot;, &quot;empty vector&quot;, &quot;e~
-## $ Cq                  &lt;dbl&gt; 14.45711, 20.02642, 17.51733, 19.79295, 14.48283, ~</code></pre>
+## $ Target              &lt;chr&gt; &quot;GAPDH&quot;, &quot;NKG2A&quot;, &quot;NKG2C&quot;, &quot;CD94&quot;, &quot;GAPDH&quot;, &quot;NKG2A…
+## $ Sample              &lt;chr&gt; &quot;Sample 1&quot;, &quot;Sample 1&quot;, &quot;Sample 1&quot;, &quot;Sample 1&quot;, &quot;S…
+## $ Biological.Set.Name &lt;chr&gt; &quot;empty vector&quot;, &quot;empty vector&quot;, &quot;empty vector&quot;, &quot;e…
+## $ Cq                  &lt;dbl&gt; 14.45711, 20.02642, 17.51733, 19.79295, 14.48283, …</code></pre>
 <p>Lets look at the 4 columns now:</p>
 <ul>
 <li><strong>Target</strong>: This variable stores the different target genes which in this case are GAPDH, NKG2A, NKG2B, and CD94.</li>
@@ -254,7 +254,7 @@ glimpse(tidyData)</code></pre>
 <pre class="r"><code>gapdh_only &lt;- tidyData %&gt;% filter(Target == &quot;GAPDH&quot;)
 avg_gapdh &lt;- gapdh_only %&gt;% group_by(Biological.Set.Name) %&gt;% summarize(ref_cq = mean(Cq))
 avg_gapdh</code></pre>
-<pre><code>## # A tibble: 3 x 2
+<pre><code>## # A tibble: 3 × 2
 ##   Biological.Set.Name ref_cq
 ##   &lt;chr&gt;                &lt;dbl&gt;
 ## 1 empty vector          14.5
@@ -331,7 +331,7 @@ head(nkg2a_geneExp)</code></pre>
 <p>Finally, let us calculate statistical parameters using <code>mean()</code> and <code>sd()</code> for the data:</p>
 <pre class="r"><code>nkg2a_geneExp_final &lt;- nkg2a_geneExp %&gt;% group_by(Biological.Set.Name) %&gt;% summarise(mean_geneExp = mean(geneExp), sd_geneExp = sd(geneExp)) %&gt;% mutate(Target = c(&quot;NKG2A&quot;, &quot;NKG2A&quot;, &quot;NKG2A&quot;))
 head(nkg2a_geneExp_final)</code></pre>
-<pre><code>## # A tibble: 3 x 4
+<pre><code>## # A tibble: 3 × 4
 ##   Biological.Set.Name mean_geneExp sd_geneExp Target
 ##   &lt;chr&gt;                      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; 
 ## 1 empty vector               1.00     0.0211  NKG2A 
@@ -344,12 +344,10 @@ head(nkg2a_geneExp_final)</code></pre>
 <div id="data-visualization" class="section level3">
 <h3>Data Visualization</h3>
 <p>Before plotting the data let us make a single df. We will use <code>full_join</code> to accomplish this and make a new df called <strong>all</strong> which contains the analysis for individual targets namely NKG2C (<strong>nkg2c_geneExp_final</strong>) and CD94 (<strong>cd94_geneExp_final</strong>).</p>
-<pre class="r"><code>all &lt;- full_join(nkg2a_geneExp_final, nkg2c_geneExp_final)</code></pre>
-<pre><code>## Joining, by = c(&quot;Biological.Set.Name&quot;, &quot;mean_geneExp&quot;, &quot;sd_geneExp&quot;, &quot;Target&quot;)</code></pre>
-<pre class="r"><code>all &lt;- full_join(all, cd94_geneExp_final)</code></pre>
-<pre><code>## Joining, by = c(&quot;Biological.Set.Name&quot;, &quot;mean_geneExp&quot;, &quot;sd_geneExp&quot;, &quot;Target&quot;)</code></pre>
-<pre class="r"><code>head(all)</code></pre>
-<pre><code>## # A tibble: 6 x 4
+<pre class="r"><code>all &lt;- full_join(nkg2a_geneExp_final, nkg2c_geneExp_final)
+all &lt;- full_join(all, cd94_geneExp_final)</code></pre>
+<pre class="r"><code>all</code></pre>
+<pre><code>## # A tibble: 9 × 4
 ##   Biological.Set.Name mean_geneExp sd_geneExp Target
 ##   &lt;chr&gt;                      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; 
 ## 1 empty vector               1.00     0.0211  NKG2A 
@@ -357,7 +355,10 @@ head(nkg2a_geneExp_final)</code></pre>
 ## 3 pcDNA-NKG2C                0.211    0.00576 NKG2A 
 ## 4 empty vector               1.00     0.0727  NKG2C 
 ## 5 pcDNA-NKG2A                0.266    0.0564  NKG2C 
-## 6 pcDNA-NKG2C                8.55     0.0526  NKG2C</code></pre>
+## 6 pcDNA-NKG2C                8.55     0.0526  NKG2C 
+## 7 empty vector               1.02     0.241   CD94  
+## 8 pcDNA-NKG2A               35.2      0.179   CD94  
+## 9 pcDNA-NKG2C               34.8      0.109   CD94</code></pre>
 <p>Let us now use <code>ggplot</code> package to plot a bar plot for the RT-qPCR data.</p>
 <pre class="r"><code>final_plot &lt;- ggplot(all, aes(x = Biological.Set.Name, y = mean_geneExp, fill = Target)) +
   geom_bar(stat = &quot;identity&quot;, width = 0.5, position = position_dodge(0.6), color = &quot;#434343&quot;) +
@@ -380,7 +381,7 @@ head(nkg2a_geneExp_final)</code></pre>
   scale_fill_manual(values = c(&quot;#d55e00&quot;, &quot;#0072b2&quot;, &quot;#009e73&quot;)) # color blind palette
 
 final_plot</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <div id="exporting-the-plot" class="section level4">
 <h4>Exporting the plot</h4>
 <p>The plot can be exported as a png file like so:</p>
