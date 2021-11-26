@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Introduction
 
-I will be using the [Tidyverse](https://www.tidyverse.org/) package in R to analyse and plot a simple RT-qPCR experiment data. In this experiment, I have ectopically-expressed two proteins namely NKG2A and NKG2C (along with their binding partner CD94) in HEK293 cells. I want to assess the expression status of these genes in the HEK293 cells relative to GAPDH using the $\Delta$$\Delta$C~T~ method. The experiment was run in a [C1000 Touch Thermal Cycler](https://www.bio-rad.com/en-us/product/c1000-touch-thermal-cycler?ID=LGTW9415) instrument. The csv file can be found [here](https://github.com/shubhamdutta26/qPCR-data-analysis-R/blob/main/qPCR_HEKs_OE_NKG2A-C_human.csv)
+I will be using the [Tidyverse](https://www.tidyverse.org/) package in R to analyse and plot a simple RT-qPCR experiment data. In this experiment, I have ectopically-expressed two proteins namely NKG2A and NKG2C (along with their binding partner CD94) in HEK293 cells. I want to assess the expression status of these genes in the HEK293 cells relative to GAPDH using the $\Delta$$\Delta$C~T~ method. The experiment was run in a [C1000 Touch Thermal Cycler](https://www.bio-rad.com/en-us/product/c1000-touch-thermal-cycler?ID=LGTW9415) instrument. The csv file can be found [here](https://github.com/shubhamdutta26/qPCR-data-analysis-R/blob/main/qPCR_HEKs_OE_NKG2A-C_human.csv).
 
 <br>
 
